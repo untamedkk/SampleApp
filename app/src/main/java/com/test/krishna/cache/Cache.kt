@@ -1,10 +1,10 @@
-package com.test.krishna
+package com.test.krishna.cache
 
 import android.content.Context
 import android.content.SharedPreferences
 import com.test.krishna.models.Model
 
-class Preferences(context: Context) {
+class Cache(context: Context) {
 
     private val PREF_NAME: String = "app_pref"
     private val KEY: String = "key"
