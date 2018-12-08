@@ -2,4 +2,6 @@
     <string name="app_name">Test Krishna</string>
     <string name="title_main_activity">Things to Deliver</string>
     <string name="title_detailed_activity">Delivery Details</string>
+
+    <string name="google_map_api_key">GOOGLE_MAP_API_KEY_GOES_HERE</string>
 </resources>
