@@ -3,10 +3,10 @@ package com.test.krishna.ui.main
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.widget.Toast
 import com.test.krishna.R
 import com.test.krishna.models.Model
+import com.test.krishna.ui.detailview.DetailViewActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity(), DeliveriesAdapter.OnItemClickListener 
     }
 
     override fun onItemClick(position: Int, delivery: Model.Delivery) {
-        Log.e("Krishna", "pos $position, desc ${delivery.description}")
+        DetailViewActivity.open(this, delivery)
     }
 
 }
