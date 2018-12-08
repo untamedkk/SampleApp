@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.test.krishna.R
+import com.test.krishna.cache.Cache
 import com.test.krishna.models.Model
 import com.test.krishna.ui.detailview.DetailViewActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -22,29 +23,37 @@ class MainActivity : AppCompatActivity(), DeliveriesAdapter.OnItemClickListener 
         com.test.krishna.network.Service.create()
     }
 
+    private lateinit var cache: Cache
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         getDeliveries(0)
 
+        cache = Cache(this)
+
         recycler_view.layoutManager = LinearLayoutManager(this)
-        adapter = DeliveriesAdapter(this)
+        adapter = DeliveriesAdapter(this, cache.cachedData)
         recycler_view.adapter = adapter
         adapter.setOnItemClickListener(this)
+
     }
 
-    private fun setAdapter(deliveries: List<Model.Delivery>) {
+    private fun setItems(deliveries: List<Model.Delivery>) {
         adapter.setItems(deliveries)
+        cacheData(deliveries)
     }
 
-    private fun showLoader() {}
+    private fun cacheData(deliveries: List<Model.Delivery>) {
+        cache.cachedData = deliveries
+    }
 
     private fun getDeliveries(offset: Int) {
         disposable = service.getDeliveries(offset = offset, limit = LIMIT)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { result -> setAdapter(result) },
+                        { result -> setItems(result) },
                         { error -> Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show() }
                 )
     }
