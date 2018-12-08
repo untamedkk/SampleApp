@@ -71,7 +71,6 @@ class DetailViewActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private val glideRequestOption: RequestOptions by lazy {
         RequestOptions()
-                .placeholder(R.drawable.ic_launcher_foreground)
                 .transform(CenterCrop())
                 .override(150, 150)
     }

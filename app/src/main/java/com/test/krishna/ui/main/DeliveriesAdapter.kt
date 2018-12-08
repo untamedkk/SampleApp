@@ -12,14 +12,9 @@ import com.test.krishna.R
 import com.test.krishna.models.Model
 import kotlinx.android.synthetic.main.item_delivery_layout.view.*
 
-class DeliveriesAdapter(private val context: Context) : RecyclerView.Adapter<DeliveriesAdapter.ViewHolder>() {
+class DeliveriesAdapter(private val context: Context, private var deliveries: List<Model.Delivery>) : RecyclerView.Adapter<DeliveriesAdapter.ViewHolder>() {
 
     private lateinit var onItemClickListener: OnItemClickListener
-    private var deliveries: List<Model.Delivery>
-
-    init {
-        deliveries = listOf<Model.Delivery>()
-    }
 
     fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
         this.onItemClickListener = onItemClickListener
@@ -49,7 +44,6 @@ class DeliveriesAdapter(private val context: Context) : RecyclerView.Adapter<Del
 
     private val glideRequestOption: RequestOptions by lazy {
         RequestOptions()
-                .placeholder(R.drawable.ic_launcher_foreground)
                 .transform(CenterCrop())
                 .override(150, 150)
     }
