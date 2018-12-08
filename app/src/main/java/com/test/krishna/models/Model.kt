@@ -2,6 +2,8 @@ package com.test.krishna.models
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 
 object Model {
     data class Delivery(val id: Int, val description: String, val imageUrl: String, val location: Location) : Parcelable {
@@ -58,6 +60,20 @@ object Model {
             override fun newArray(size: Int): Array<Location?> {
                 return arrayOfNulls(size)
             }
+        }
+    }
+
+    fun toJsonString(deliveries: List<Delivery>): String {
+        return GsonBuilder().create().toJson(deliveries)
+    }
+
+    fun fromJsonString(string: String): List<Delivery> = when (string.isEmpty()) {
+        true -> {
+            listOf<Delivery>()
+        }
+        false -> {
+            val type = object : TypeToken<List<Delivery>>() {}.type
+            GsonBuilder().create().fromJson(string, type)
         }
     }
 }
