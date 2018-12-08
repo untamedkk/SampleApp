@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.item_delivery_layout.view.*
 class DeliveriesAdapter(private val context: Context) : RecyclerView.Adapter<DeliveriesAdapter.ViewHolder>() {
 
     private lateinit var onItemClickListener: OnItemClickListener
-    private lateinit var deliveries: List<Model.Delivery>
+    private var deliveries: List<Model.Delivery>
 
     init {
         deliveries = listOf<Model.Delivery>()
